@@ -4,44 +4,44 @@
 
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.nesscomputing</groupId>
-    <artifactId>ness-oss-parent</artifactId>
-    <version>32</version>
+    <groupId>com.opentable</groupId>
+    <artifactId>otj-parent</artifactId>
+    <version>2-SNAPSHOT</version>
   </parent>
 
   <scm>
-    <connection>scm:git:git://github.com/NessComputing/components-ness-jackson.git</connection>
-    <developerConnection>scm:git:git@github.com:NessComputing/components-ness-jackson.git</developerConnection>
-    <url>http://github.com/NessComputing/components-ness-jackson</url>
+    <connection>scm:git:git://github.com/opentable/otj-jackson.git</connection>
+    <developerConnection>scm:git:git@github.com:opentable/otj-jackson.git</developerConnection>
+    <url>http://github.com/opentable/otj-jackson</url>
     <tag>HEAD</tag>
   </scm>
 
-  <groupId>com.nesscomputing.components</groupId>
-  <artifactId>ness-jackson</artifactId>
-  <name>ness-jackson</name>
-  <version>2.3.5-SNAPSHOT</version>
+  <groupId>com.opentable.components</groupId>
+  <artifactId>otj-jackson</artifactId>
+  <name>otj-jackson</name>
+  <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <description>Jackson related code</description>
 
   <properties>
-    <dep.jackson.version>2.2.3</dep.jackson.version>
+    <dep.jackson.version>2.3.2</dep.jackson.version>
   </properties>
 
   <dependencies>
     <dependency>
-      <groupId>com.nesscomputing.components</groupId>
-      <artifactId>ness-core</artifactId>
-      <version>1.9.1</version>
+      <groupId>com.opentable.components</groupId>
+      <artifactId>otj-core</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
     </dependency>
     <dependency>
-      <groupId>com.nesscomputing.components</groupId>
-      <artifactId>ness-logging</artifactId>
-      <version>1.1.1</version>
+      <groupId>com.opentable.components</groupId>
+      <artifactId>otj-logging</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
     </dependency>
     <dependency>
-      <groupId>com.nesscomputing.components</groupId>
-      <artifactId>ness-config</artifactId>
-      <version>2.3.1</version>
+      <groupId>com.opentable.components</groupId>
+      <artifactId>otj-config</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
     </dependency>
 
     <dependency>
@@ -66,7 +66,7 @@
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.datatype</groupId>
-      <artifactId>jackson-datatype-joda</artifactId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
       <version>${dep.jackson.version}</version>
     </dependency>
     <dependency>
@@ -107,12 +107,6 @@
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>joda-time</groupId>
-      <artifactId>joda-time</artifactId>
-      <scope>test</scope>
     </dependency>
 
     <dependency>
