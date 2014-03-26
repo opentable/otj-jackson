@@ -24,7 +24,6 @@ import com.google.inject.multibindings.Multibinder;
 import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 
-
 public final class OpenTableObjectMapperBinder
 {
     public static final String JACKSON_NAME = "_jackson";
@@ -45,8 +44,6 @@ public final class OpenTableObjectMapperBinder
 
     /**
      * Set a Jackson feature on the Object Mapper.
-     *
-     * @see {@link JsonGenerator.Feature}, {@link JsonParser.Feature}, {@link SerializationConfig.Feature} and {@link DeserializationConfig.Feature} for available features.
      */
     public static LinkedBindingBuilder<Boolean> bindJacksonOption(final Binder binder, final Enum<?> option)
     {
