@@ -22,7 +22,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.UUIDDeserializer;
 
-import com.opentable.uuid.NessUUID;
+import com.opentable.uuid.FastUUID;
 
 class CustomUuidDeserializer extends UUIDDeserializer
 {
@@ -32,6 +32,6 @@ class CustomUuidDeserializer extends UUIDDeserializer
     protected UUID _deserialize(String value, DeserializationContext ctxt)
     throws IOException, JsonProcessingException
     {
-        return NessUUID.fromString(value);
+        return FastUUID.fromString(value);
     }
 }

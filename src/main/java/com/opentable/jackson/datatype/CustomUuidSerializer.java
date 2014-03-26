@@ -24,7 +24,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import com.google.inject.Inject;
 
-import com.opentable.uuid.NessUUID;
+import com.opentable.uuid.FastUUID;
 
 class CustomUuidSerializer extends StdSerializer<UUID>
 {
@@ -38,6 +38,6 @@ class CustomUuidSerializer extends StdSerializer<UUID>
     public void serialize(UUID value, JsonGenerator jgen, SerializerProvider provider)
     throws IOException, JsonGenerationException
     {
-        jgen.writeString(NessUUID.toString(value));
+        jgen.writeString(FastUUID.toString(value));
     }
 }
