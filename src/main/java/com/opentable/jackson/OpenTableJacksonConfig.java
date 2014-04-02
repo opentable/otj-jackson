@@ -25,7 +25,7 @@ public abstract class OpenTableJacksonConfig
         MILLIS, ISO8601;
     }
 
-    @Config("ness.jackson.time-format")
+    @Config("ot.jackson.time-format")
     @Default("MILLIS")
     public NessJacksonTimeFormat getTimeFormat()
     {

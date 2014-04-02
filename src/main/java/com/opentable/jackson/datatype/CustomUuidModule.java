@@ -29,7 +29,7 @@ class CustomUuidModule extends SimpleModule
 
     @Inject
     public CustomUuidModule(JsonDeserializer<UUID> d, JsonSerializer<UUID> s) {
-        super("CustomUuidModule", new Version(2, 0, 0, null, "com.nesscomputing.components", "ness-jackson/CustomUuidModule"));
+        super("CustomUuidModule", new Version(2, 0, 0, null, "com.opentable.components", "otj-jackson/CustomUuidModule"));
         addDeserializer(UUID.class, d);
         addSerializer(UUID.class, s);
     }
