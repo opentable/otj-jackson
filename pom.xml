@@ -13,13 +13,13 @@
     <connection>scm:git:git://github.com/opentable/otj-jackson.git</connection>
     <developerConnection>scm:git:git@github.com:opentable/otj-jackson.git</developerConnection>
     <url>http://github.com/opentable/otj-jackson</url>
-    <tag>otj-jackson-1.0.1</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <groupId>com.opentable.components</groupId>
   <artifactId>otj-jackson</artifactId>
   <name>otj-jackson</name>
-  <version>1.0.1</version>
+  <version>1.0.2-SNAPSHOT</version>
   <packaging>jar</packaging>
   <description>Jackson related code</description>
 
