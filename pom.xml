@@ -25,6 +25,7 @@
 
   <properties>
     <dep.jackson.version>2.3.2</dep.jackson.version>
+    <dep.jackson.mrbean.version>2.3.2-OT-2</dep.jackson.mrbean.version>
   </properties>
 
   <dependencies>
@@ -72,7 +73,7 @@
     <dependency>
       <groupId>com.fasterxml.jackson.module</groupId>
       <artifactId>jackson-module-mrbean</artifactId>
-      <version>${dep.jackson.version}</version>
+      <version>${dep.jackson.mrbean.version}</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.module</groupId>
