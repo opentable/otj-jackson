@@ -20,15 +20,15 @@ import org.skife.config.Default;
 
 public abstract class OpenTableJacksonConfig
 {
-    public enum NessJacksonTimeFormat
+    public enum JacksonTimeFormat
     {
         MILLIS, ISO8601;
     }
 
     @Config("ot.jackson.time-format")
     @Default("MILLIS")
-    public NessJacksonTimeFormat getTimeFormat()
+    public JacksonTimeFormat getTimeFormat()
     {
-        return NessJacksonTimeFormat.MILLIS;
+        return JacksonTimeFormat.MILLIS;
     }
 }
