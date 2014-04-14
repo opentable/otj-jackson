@@ -26,9 +26,9 @@ public abstract class OpenTableJacksonConfig
     }
 
     @Config("ot.jackson.time-format")
-    @Default("MILLIS")
+    @Default("ISO8601")
     public JacksonTimeFormat getTimeFormat()
     {
-        return JacksonTimeFormat.MILLIS;
+        return JacksonTimeFormat.ISO8601;
     }
 }
