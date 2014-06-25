@@ -78,11 +78,11 @@ public class TestJacksonFormatObjectMapperProvider
                                                        });
 
         injector.injectMembers(this);
-        final ObjectMapper defaultMapper = injector.getInstance(Key.get(ObjectMapper.class, Names.named("default")));
+        final ObjectMapper myDefaultMapper = injector.getInstance(Key.get(ObjectMapper.class, Names.named("default")));
 
-        Assert.assertNotNull(defaultMapper);
-        Assert.assertSame(jsonMapper, defaultMapper);
-        Assert.assertNotSame(smileMapper, defaultMapper);
+        Assert.assertNotNull(myDefaultMapper);
+        Assert.assertSame(jsonMapper, myDefaultMapper);
+        Assert.assertNotSame(smileMapper, myDefaultMapper);
     }
 
     @Test
@@ -108,11 +108,11 @@ public class TestJacksonFormatObjectMapperProvider
                                                        });
 
         injector.injectMembers(this);
-        final ObjectMapper defaultMapper = injector.getInstance(Key.get(ObjectMapper.class, Names.named("default")));
+        final ObjectMapper myDefaultMapper = injector.getInstance(Key.get(ObjectMapper.class, Names.named("default")));
 
-        Assert.assertNotNull(defaultMapper);
-        Assert.assertSame(jsonMapper, defaultMapper);
-        Assert.assertNotSame(smileMapper, defaultMapper);
+        Assert.assertNotNull(myDefaultMapper);
+        Assert.assertSame(jsonMapper, myDefaultMapper);
+        Assert.assertNotSame(smileMapper, myDefaultMapper);
     }
 
     @Test
@@ -138,11 +138,11 @@ public class TestJacksonFormatObjectMapperProvider
                                                        });
 
         injector.injectMembers(this);
-        final ObjectMapper defaultMapper = injector.getInstance(Key.get(ObjectMapper.class, Names.named("default")));
+        final ObjectMapper myDefaultMapper = injector.getInstance(Key.get(ObjectMapper.class, Names.named("default")));
 
-        Assert.assertNotNull(defaultMapper);
-        Assert.assertNotSame(jsonMapper, defaultMapper);
-        Assert.assertSame(smileMapper, defaultMapper);
+        Assert.assertNotNull(myDefaultMapper);
+        Assert.assertNotSame(jsonMapper, myDefaultMapper);
+        Assert.assertSame(smileMapper, myDefaultMapper);
     }
 }
 

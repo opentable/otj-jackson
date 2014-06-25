@@ -58,8 +58,8 @@ class SerializerBinderBuilderImpl<T> implements SerializerBinderBuilder<T> {
     // CONFIGURATION
 
     @Override
-    public SerializerBinderBuilder<T> onError(Callback<Throwable> action) {
-        this.action = action;
+    public SerializerBinderBuilder<T> onError(Callback<Throwable> newAction) {
+        this.action = newAction;
         return this;
     }
 
