@@ -6,7 +6,7 @@
   <parent>
     <groupId>com.opentable</groupId>
     <artifactId>otj-parent</artifactId>
-    <version>22</version>
+    <version>23-SNAPSHOT</version>
   </parent>
 
   <scm>
@@ -19,14 +19,9 @@
   <groupId>com.opentable.components</groupId>
   <artifactId>otj-jackson</artifactId>
   <name>otj-jackson</name>
-  <version>1.1.1-SNAPSHOT</version>
+  <version>1.2.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <description>Jackson related code</description>
-
-  <properties>
-    <dep.jackson.version>2.3.2</dep.jackson.version>
-    <dep.jackson.mrbean.version>2.3.2-OT-2</dep.jackson.mrbean.version>
-  </properties>
 
   <dependencies>
     <dependency>
@@ -48,42 +43,36 @@
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-annotations</artifactId>
-      <version>${dep.jackson.version}</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-core</artifactId>
-      <version>${dep.jackson.version}</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-      <version>${dep.jackson.version}</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.dataformat</groupId>
       <artifactId>jackson-dataformat-smile</artifactId>
-      <version>${dep.jackson.version}</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.datatype</groupId>
       <artifactId>jackson-datatype-jsr310</artifactId>
+      <!-- XXX: remove after https://github.com/basepom/basepom/pull/7 is merged -->
       <version>${dep.jackson.version}</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.module</groupId>
       <artifactId>jackson-module-mrbean</artifactId>
-      <version>${dep.jackson.mrbean.version}</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.module</groupId>
       <artifactId>jackson-module-afterburner</artifactId>
-      <version>${dep.jackson.version}</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.datatype</groupId>
       <artifactId>jackson-datatype-guava</artifactId>
-      <version>${dep.jackson.version}</version>
     </dependency>
 
     <dependency>
