@@ -20,14 +20,15 @@ import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-import com.opentable.logging.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * An ObjectMapper provider that can be configured to return json or smile.
  */
 public class JacksonFormatObjectMapperProvider implements Provider<ObjectMapper>
 {
-    private final Log LOG = Log.findLog();
+    private static final Logger LOG = LoggerFactory.getLogger(JacksonFormatObjectMapperProvider.class);
     private final JacksonFormatConfig jacksonFormatConfig;
 
     private ObjectMapper objectMapper = null;
