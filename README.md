@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/opentable/otj-jackson.svg)](https://travis-ci.org/opentable/otj-jackson)
 OpenTable Jackson Component
 ===========================
 
