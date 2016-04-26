@@ -13,24 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.opentable.jackson.datatype;
+package com.opentable.jackson;
 
 import java.util.UUID;
 
 import com.fasterxml.jackson.core.Version;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.google.inject.Inject;
 
 class CustomUuidModule extends SimpleModule
 {
     private static final long serialVersionUID = 1L;
 
-    @Inject
-    public CustomUuidModule(JsonDeserializer<UUID> d, JsonSerializer<UUID> s) {
+    CustomUuidModule() {
         super("CustomUuidModule", new Version(2, 0, 0, null, "com.opentable.components", "otj-jackson/CustomUuidModule"));
-        addDeserializer(UUID.class, d);
-        addSerializer(UUID.class, s);
+        addDeserializer(UUID.class, deserializer());
+        addSerializer(UUID.class, serializer());
+    }
+
+    CustomUuidSerializer serializer() {
+        return new CustomUuidSerializer();
+    }
+
+    CustomUuidDeserializer deserializer() {
+        return new CustomUuidDeserializer();
     }
 }

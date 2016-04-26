@@ -15,21 +15,23 @@
  */
 package com.opentable.jackson;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.io.IOException;
+import java.util.UUID;
 
-import com.google.inject.BindingAnnotation;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.deser.std.UUIDDeserializer;
 
-/**
- * Marker annotation for using the json based Jackson code.
- */
-@BindingAnnotation
-@Documented
-@Target({ ElementType.FIELD, ElementType.PARAMETER, ElementType.METHOD })
-@Retention(RetentionPolicy.RUNTIME)
-public @interface JsonSerializerFunction
+import com.opentable.uuid.FastUUID;
+
+class CustomUuidDeserializer extends UUIDDeserializer
 {
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    protected UUID _deserialize(String value, DeserializationContext ctxt)
+    throws IOException, JsonProcessingException
+    {
+        return FastUUID.fromString(value);
+    }
 }

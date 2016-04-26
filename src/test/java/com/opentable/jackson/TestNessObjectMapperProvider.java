@@ -28,74 +28,39 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.datatype.guava.GuavaModule;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableMultiset;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
-import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.Module;
-import com.google.inject.Scopes;
-import com.google.inject.Stage;
-import com.google.inject.util.Modules;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.opentable.config.ConfigModule;
-import com.opentable.jackson.OpenTableJacksonModule;
-import com.opentable.jackson.OpenTableObjectMapperBinder;
-
 public class TestNessObjectMapperProvider
 {
-    private ObjectMapper getObjectMapper(final Module module)
+    private ObjectMapper getObjectMapper()
     {
-        return getObjectMapper(module, new AbstractModule() { @Override protected void configure() {} });
-    }
-
-    private ObjectMapper getObjectMapper(final Module module, final Module overrides)
-    {
-        final Injector injector = Guice.createInjector(Stage.PRODUCTION,
-                Modules.override(
-                                                       ConfigModule.forTesting(),
-                                                       new OpenTableJacksonModule(),
-                                                       new AbstractModule() {
-            @Override
-            public void configure() {
-                if (module != null) {
-                    install(module);
-                }
-            }
-        }).with(overrides));
-
-        return injector.getInstance(ObjectMapper.class);
+        return new OpenTableJacksonConfiguration().objectMapper();
     }
 
     @Test
     public void testSimple()
     {
-        final ObjectMapper mapper = getObjectMapper(null);
+        final ObjectMapper mapper = getObjectMapper();
         Assert.assertNotNull(mapper);
     }
 
-	// This test ensures that the GuavaModule is correctly installed
-	@Test
-	public void testMultisetDeserialization() throws Exception {
-	    ObjectMapper mapper = getObjectMapper(new AbstractModule() {
-            @Override
-            protected void configure() {
-                OpenTableObjectMapperBinder.bindJacksonModule(binder()).to(GuavaModule.class).in(Scopes.SINGLETON);
-            }
-        });
+    // This test ensures that the GuavaModule is correctly installed
+    @Test
+    public void testMultisetDeserialization() throws Exception {
+        ObjectMapper mapper = getObjectMapper();
         Multiset<String> set = mapper.readValue("[\"a\",\"a\"]", new TypeReference<HashMultiset<String>>() {});
-	    Assert.assertEquals(ImmutableMultiset.of("a", "a"), set);
+        Assert.assertEquals(ImmutableMultiset.of("a", "a"), set);
 
-	    Multimap<String, String> map = mapper.readValue("{\"a\":[\"b\",\"c\"]}", new TypeReference<ImmutableMultimap<String, String>>() {});
-	    Assert.assertEquals(ImmutableMultimap.of("a", "b", "a", "c"), map);
-	}
+        Multimap<String, String> map = mapper.readValue("{\"a\":[\"b\",\"c\"]}", new TypeReference<ImmutableMultimap<String, String>>() {});
+        Assert.assertEquals(ImmutableMultimap.of("a", "b", "a", "c"), map);
+    }
 
     public static class DummyBean
     {

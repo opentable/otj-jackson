@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.opentable.jackson.datatype;
+package com.opentable.jackson;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -22,13 +22,13 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import com.google.inject.Inject;
 
 import com.opentable.uuid.FastUUID;
 
 class CustomUuidSerializer extends StdSerializer<UUID>
 {
-    @Inject
+    private static final long serialVersionUID = 1L;
+
     CustomUuidSerializer()
     {
         super(UUID.class);

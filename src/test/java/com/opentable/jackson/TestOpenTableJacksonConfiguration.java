@@ -15,21 +15,16 @@
  */
 package com.opentable.jackson;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.google.inject.BindingAnnotation;
+import org.junit.Assert;
+import org.junit.Test;
 
-/**
- * Marker annotation for using the json based Jackson code.
- */
-@BindingAnnotation
-@Documented
-@Target({ ElementType.FIELD, ElementType.PARAMETER, ElementType.METHOD })
-@Retention(RetentionPolicy.RUNTIME)
-public @interface JsonMapper
+public class TestOpenTableJacksonConfiguration
 {
+    @Test
+    public void testSimple() {
+        final ObjectMapper mapper = new OpenTableJacksonConfiguration().objectMapper();
+        Assert.assertNotNull(mapper);
+    }
 }
