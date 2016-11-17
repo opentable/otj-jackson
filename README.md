@@ -16,9 +16,11 @@ JSON processing libraries available for Java.
 It is important that all code configures Jackson similarly - the set of installed modules, various serialization settings,
 and deserialization configuartion must be reasonably harmonious for compatibility.
 
-The [OpenTableJacksonModule](https://github.com/opentable/otj-jackson/blob/master/src/main/java/com/opentable/jackson/OpenTableJacksonModule.java)
-binds configured Jackson `ObjectMapper`s in the Guice injector.  Normally this is installed by a
-[server template](https://github.com/opentable/otj-server).
+The [OpenTableJacksonConfiguration](https://github.com/opentable/otj-jackson/blob/master/src/main/java/com/opentable/jackson/OpenTableJacksonConfiguration.java)
+binds a configured Jackson `ObjectMapper`s in the Spring context.  Normally this is imported by the
+[server](https://github.com/opentable/otj-server).
+
+We also provide a high performance UUID serializer and deserializer.
 
 Component Level
 ---------------
