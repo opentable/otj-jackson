@@ -15,6 +15,7 @@
  */
 package com.opentable.jackson;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.Assert;
@@ -22,9 +23,27 @@ import org.junit.Test;
 
 public class TestOpenTableJacksonConfiguration
 {
+    final ObjectMapper mapper = new OpenTableJacksonConfiguration().objectMapper();
+
     @Test
     public void testSimple() {
-        final ObjectMapper mapper = new OpenTableJacksonConfiguration().objectMapper();
         Assert.assertNotNull(mapper);
+    }
+
+    @Test
+    public void testParameterNames() throws Exception {
+        MrBean mrBean = mapper.readValue("{\"bar\":\"1\",\"foo\":\"2\"}", MrBean.class);
+        Assert.assertEquals("1", mrBean.bar);
+        Assert.assertEquals("2", mrBean.foo);
+    }
+
+    public static class MrBean {
+        final String foo, bar;
+
+        @JsonCreator
+        public MrBean(String foo, String bar) {
+            this.foo = foo;
+            this.bar = bar;
+        }
     }
 }

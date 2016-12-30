@@ -21,9 +21,11 @@ import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.guava.GuavaModule;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
 import com.fasterxml.jackson.module.mrbean.MrBeanModule;
+import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -47,7 +49,9 @@ public class OpenTableJacksonConfiguration
                                 javaTimeModule(),
                                 mrBeanModule(),
                                 afterburnerModule(),
-                                customUuidModule());
+                                customUuidModule(),
+                                jdk8Module(),
+                                parameterNamesModule());
 
         // This needs to be set, otherwise the mapper will fail on every new property showing up.
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -96,5 +100,13 @@ public class OpenTableJacksonConfiguration
 
     CustomUuidModule customUuidModule() {
         return new CustomUuidModule();
+    }
+
+    Jdk8Module jdk8Module() {
+        return new Jdk8Module();
+    }
+
+    ParameterNamesModule parameterNamesModule() {
+        return new ParameterNamesModule();
     }
 }
