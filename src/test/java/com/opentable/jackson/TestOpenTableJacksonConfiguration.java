@@ -37,6 +37,13 @@ public class TestOpenTableJacksonConfiguration
         Assert.assertEquals("2", mrBean.foo);
     }
 
+    @Test
+    public void testBadParameterName() throws Exception {
+        MrBean mrBean = mapper.readValue("{\"bax\":\"1\",\"foo\":\"2\"}", MrBean.class);
+        Assert.assertNull(mrBean.bar);
+        Assert.assertEquals("2", mrBean.foo);
+    }
+
     public static class MrBean {
         final String foo, bar;
 
