@@ -15,25 +15,16 @@
  */
 package com.opentable.jackson;
 
-import java.io.IOException;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicBoolean;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializerProvider;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 public class TestCustomUuidModule
 {
-    final AtomicBoolean serCalled = new AtomicBoolean();
-    final AtomicBoolean deserCalled = new AtomicBoolean();
-
     // This test ensures that the CustomUuidModule is correctly installed
     @Test
     public void testCustomUUIDDeserialization() throws Exception {
@@ -41,7 +32,6 @@ public class TestCustomUuidModule
         ObjectMapper mapper = getObjectMapper();
         UUID uuid = mapper.readValue('"' + orig.toString() + '"', new TypeReference<UUID>(){});
         Assert.assertEquals(orig, uuid);
-        Assert.assertTrue(deserCalled.get());
     }
 
     @Test
@@ -49,38 +39,11 @@ public class TestCustomUuidModule
         ObjectMapper mapper = getObjectMapper();
         final UUID id = new UUID(9, 9);
         Assert.assertEquals('"' + id.toString() + '"', mapper.writeValueAsString(id));
-        Assert.assertTrue(serCalled.get());
     }
 
     @SuppressWarnings("serial")
     private ObjectMapper getObjectMapper()
     {
-        return new OpenTableJacksonConfiguration() {
-            @Override
-            CustomUuidModule customUuidModule() {
-                return new CustomUuidModule() {
-                    @Override
-                    CustomUuidSerializer serializer() {
-                        return new CustomUuidSerializer() {
-                            @Override
-                            public void serialize(UUID value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
-                                serCalled.set(true);
-                                super.serialize(value, jgen, provider);
-                            }
-                        };
-                    }
-                    @Override
-                    CustomUuidDeserializer deserializer() {
-                        return new CustomUuidDeserializer() {
-                            @Override
-                            public UUID deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-                                deserCalled.set(true);
-                                return super.deserialize(p, ctxt);
-                            }
-                        };
-                    }
-                };
-            }
-        }.objectMapper();
+        return new OpenTableJacksonConfiguration().objectMapper();
     }
 }

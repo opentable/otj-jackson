@@ -26,15 +26,8 @@ class CustomUuidModule extends SimpleModule
 
     CustomUuidModule() {
         super("CustomUuidModule", new Version(2, 0, 0, null, "com.opentable.components", "otj-jackson/CustomUuidModule"));
-        addDeserializer(UUID.class, deserializer());
-        addSerializer(UUID.class, serializer());
+        addDeserializer(UUID.class, new CustomUuidDeserializer());
+        addSerializer(UUID.class, new CustomUuidSerializer());
     }
 
-    CustomUuidSerializer serializer() {
-        return new CustomUuidSerializer();
-    }
-
-    CustomUuidDeserializer deserializer() {
-        return new CustomUuidDeserializer();
-    }
 }
