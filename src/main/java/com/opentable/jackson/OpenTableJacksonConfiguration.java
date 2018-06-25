@@ -49,7 +49,6 @@ public class OpenTableJacksonConfiguration
                                 javaTimeModule(),
                                 mrBeanModule(),
                                 afterburnerModule(),
-                                customUuidModule(),
                                 jdk8Module(),
                                 parameterNamesModule());
 
@@ -96,10 +95,6 @@ public class OpenTableJacksonConfiguration
 
     AfterburnerModule afterburnerModule() {
         return new AfterburnerModule();
-    }
-
-    CustomUuidModule customUuidModule() {
-        return new CustomUuidModule();
     }
 
     Jdk8Module jdk8Module() {

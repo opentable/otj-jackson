@@ -36,11 +36,6 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.opentable.components</groupId>
-      <artifactId>otj-core</artifactId>
-    </dependency>
-
-    <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-annotations</artifactId>
     </dependency>
