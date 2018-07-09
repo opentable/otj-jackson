@@ -41,6 +41,9 @@ public class OpenTableJacksonConfiguration
     @Value("${ot.jackson.time-format:ISO8601}")
     JacksonTimeFormat timeFormat = JacksonTimeFormat.ISO8601;
 
+    @Value("${ot.jackson.afterburner:#{false}}")
+    private boolean enableAfterBurner = false;
+
     @Bean
     public ObjectMapper objectMapper() {
         ObjectMapper mapper = new ObjectMapper();
@@ -48,9 +51,11 @@ public class OpenTableJacksonConfiguration
         mapper.registerModules( guavaModule(),
                                 javaTimeModule(),
                                 mrBeanModule(),
-                                afterburnerModule(),
                                 jdk8Module(),
                                 parameterNamesModule());
+        if (enableAfterBurner) {
+            mapper.registerModule(afterburnerModule());
+        }
 
         // This needs to be set, otherwise the mapper will fail on every new property showing up.
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
