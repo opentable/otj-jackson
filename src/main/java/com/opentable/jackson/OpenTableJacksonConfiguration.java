@@ -42,7 +42,10 @@ public class OpenTableJacksonConfiguration
     JacksonTimeFormat timeFormat = JacksonTimeFormat.ISO8601;
 
     @Value("${ot.jackson.afterburner:#{false}}")
-    private boolean enableAfterBurner = false;
+    private final boolean enableAfterBurner;
+
+    @Value("${ot.jackson.mrbean:#{false}}")
+    private final boolean enableMrBean;
 
     @Bean
     public ObjectMapper objectMapper() {
@@ -50,9 +53,11 @@ public class OpenTableJacksonConfiguration
 
         mapper.registerModules( guavaModule(),
                                 javaTimeModule(),
-                                mrBeanModule(),
                                 jdk8Module(),
                                 parameterNamesModule());
+        if (enableMrBean) {
+            mapper.registerModule(mrBeanModule());
+        }
         if (enableAfterBurner) {
             mapper.registerModule(afterburnerModule());
         }
