@@ -42,10 +42,10 @@ public class OpenTableJacksonConfiguration
     JacksonTimeFormat timeFormat = JacksonTimeFormat.ISO8601;
 
     @Value("${ot.jackson.afterburner:#{false}}")
-    private final boolean enableAfterBurner;
+    private boolean enableAfterBurner;
 
     @Value("${ot.jackson.mrbean:#{false}}")
-    private final boolean enableMrBean;
+    private boolean enableMrBean;
 
     @Bean
     public ObjectMapper objectMapper() {
