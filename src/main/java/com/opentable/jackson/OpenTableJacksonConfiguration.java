@@ -16,6 +16,7 @@
 package com.opentable.jackson;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,6 +27,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
 import com.fasterxml.jackson.module.mrbean.MrBeanModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
+import com.google.common.annotations.VisibleForTesting;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -46,6 +48,10 @@ public class OpenTableJacksonConfiguration
 
     @Value("${ot.jackson.mrbean:#{false}}")
     private boolean enableMrBean;
+
+    @Value("${ot.jackson.relaxed-parser:#{true}}")
+    @VisibleForTesting
+    boolean relaxedParser = true;
 
     @Bean
     public ObjectMapper objectMapper() {
@@ -87,6 +93,14 @@ public class OpenTableJacksonConfiguration
 
         // by default, don't serialize null values.
         mapper.setSerializationInclusion(Include.NON_NULL);
+
+        // Relaxed parsing
+        if (relaxedParser) {
+            // Single quotes
+            mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
+            // Unquoted field names
+            mapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
+        }
 
         return mapper;
     }
