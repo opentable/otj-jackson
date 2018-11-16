@@ -1,6 +1,17 @@
 Changelog
 =========
 
+2.1.4
+-----
+* As part of the AU stack convergence we are turning two JACKSON features on by default
+
+Feature.ALLOW_SINGLE_QUOTES - allows single quotes in JSON
+Feature.ALLOW_UNQUOTED_FIELD_NAMES - allows unquoted field names in json
+
+Because this is MORE lenient, it probably won't cause issues. If it does, or you prefer a more strict JSON
+import, set ot.jackson.relaxed-parser=false
+
+
 2.1.3
 -----
 
