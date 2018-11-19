@@ -34,6 +34,12 @@
   <version>2.1.5-SNAPSHOT</version>
   <description>Jackson related code</description>
 
+  <properties>
+    <basepom.oss.skip-scala-doc>true</basepom.oss.skip-scala-doc>
+    <basepom.check.skip-javadoc>false</basepom.check.skip-javadoc>
+    <basepom.check.fail-javadoc>false</basepom.check.fail-javadoc>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
