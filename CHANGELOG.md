@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.1.5
+-----
+* ot.jackson.relaxed-parser is false by default
+
 2.1.4
 -----
 * As part of the AU stack convergence we are turning two JACKSON features on by default

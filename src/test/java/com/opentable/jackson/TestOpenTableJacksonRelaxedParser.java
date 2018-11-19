@@ -27,7 +27,9 @@ public class TestOpenTableJacksonRelaxedParser
 
     @Test
     public void testSingleQuotes() throws Exception {
-        final ObjectMapper mapper = new OpenTableJacksonConfiguration().objectMapper();
+        OpenTableJacksonConfiguration conf = new OpenTableJacksonConfiguration();
+        conf.relaxedParser = true;
+        final ObjectMapper mapper = conf.objectMapper();
         MrBean mrBean = mapper.readValue("{'bar':\"1\",\"foo\":\"2\"}", MrBean.class);
         Assert.assertEquals("1", mrBean.bar);
         Assert.assertEquals("2", mrBean.foo);
@@ -35,7 +37,9 @@ public class TestOpenTableJacksonRelaxedParser
 
     @Test
     public void testUnquotedFieldNames() throws Exception {
-        final ObjectMapper mapper = new OpenTableJacksonConfiguration().objectMapper();
+        OpenTableJacksonConfiguration conf = new OpenTableJacksonConfiguration();
+        conf.relaxedParser = true;
+        final ObjectMapper mapper = conf.objectMapper();
         MrBean mrBean = mapper.readValue("{bar:\"1\",\"foo\":\"2\"}", MrBean.class);
         Assert.assertEquals("1", mrBean.bar);
         Assert.assertEquals("2", mrBean.foo);
@@ -44,7 +48,6 @@ public class TestOpenTableJacksonRelaxedParser
     @Test(expected = JsonParseException.class)
     public void testSingleQuotesShouldFail() throws Exception {
         OpenTableJacksonConfiguration conf = new OpenTableJacksonConfiguration();
-        conf.relaxedParser = false;
         final ObjectMapper mapper = conf.objectMapper();
         MrBean mrBean = mapper.readValue("{'bar':\"1\",\"foo\":\"2\"}", MrBean.class);
         Assert.assertEquals("1", mrBean.bar);
@@ -54,7 +57,6 @@ public class TestOpenTableJacksonRelaxedParser
     @Test(expected = JsonParseException.class)
     public void testUnquotedFieldNamesShouldFail() throws Exception {
         OpenTableJacksonConfiguration conf = new OpenTableJacksonConfiguration();
-        conf.relaxedParser = false;
         final ObjectMapper mapper = conf.objectMapper();
         MrBean mrBean = mapper.readValue("{bar:\"1\",\"foo\":\"2\"}", MrBean.class);
         Assert.assertEquals("1", mrBean.bar);
