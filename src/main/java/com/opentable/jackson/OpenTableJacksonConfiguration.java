@@ -49,9 +49,9 @@ public class OpenTableJacksonConfiguration
     @Value("${ot.jackson.mrbean:#{false}}")
     private boolean enableMrBean;
 
-    @Value("${ot.jackson.relaxed-parser:#{true}}")
+    @Value("${ot.jackson.relaxed-parser:#{false}}")
     @VisibleForTesting
-    boolean relaxedParser = true;
+    boolean relaxedParser = false;
 
     @Bean
     public ObjectMapper objectMapper() {
