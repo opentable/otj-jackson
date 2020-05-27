@@ -54,6 +54,7 @@ public class OpenTableJacksonConfiguration
     @Value("${ot.jackson.relaxed-parser:#{false}}")
     private boolean relaxedParser = false;
 
+    // See https://github.com/FasterXML/jackson-databind/issues/2643 for why the custom dateformat
     private DateFormat dateFormat = new StdDateFormat().withColonInTimeZone(false);
 
     @Bean
