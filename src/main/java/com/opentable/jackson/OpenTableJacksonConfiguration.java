@@ -15,12 +15,15 @@
  */
 package com.opentable.jackson;
 
+import java.text.DateFormat;
+
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.util.StdDateFormat;
 import com.fasterxml.jackson.datatype.guava.GuavaModule;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -50,12 +53,13 @@ public class OpenTableJacksonConfiguration
     private boolean enableMrBean;
 
     @Value("${ot.jackson.relaxed-parser:#{false}}")
-    @VisibleForTesting
-    boolean relaxedParser = false;
+    private boolean relaxedParser = false;
+
+    private DateFormat dateFormat = new StdDateFormat().withColonInTimeZone(false);
 
     @Bean
     public ObjectMapper objectMapper() {
-        ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper().setDateFormat(dateFormat);
 
         mapper.registerModules( guavaModule(),
                                 javaTimeModule(),
@@ -127,5 +131,25 @@ public class OpenTableJacksonConfiguration
 
     ParameterNamesModule parameterNamesModule() {
         return new ParameterNamesModule();
+    }
+
+    public OpenTableJacksonConfiguration setEnableAfterBurner(final boolean enableAfterBurner) {
+        this.enableAfterBurner = enableAfterBurner;
+        return this;
+    }
+
+    public OpenTableJacksonConfiguration setEnableMrBean(final boolean enableMrBean) {
+        this.enableMrBean = enableMrBean;
+        return this;
+    }
+
+    public OpenTableJacksonConfiguration setRelaxedParser(final boolean relaxedParser) {
+        this.relaxedParser = relaxedParser;
+        return this;
+    }
+
+    public OpenTableJacksonConfiguration setTimeFormat(final JacksonTimeFormat timeFormat) {
+        this.timeFormat = timeFormat;
+        return this;
     }
 }

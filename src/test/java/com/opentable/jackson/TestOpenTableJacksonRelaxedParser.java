@@ -27,8 +27,7 @@ public class TestOpenTableJacksonRelaxedParser
 
     @Test
     public void testSingleQuotes() throws Exception {
-        OpenTableJacksonConfiguration conf = new OpenTableJacksonConfiguration();
-        conf.relaxedParser = true;
+        OpenTableJacksonConfiguration conf = new OpenTableJacksonConfiguration().setRelaxedParser(true);
         final ObjectMapper mapper = conf.objectMapper();
         MrBean mrBean = mapper.readValue("{'bar':\"1\",\"foo\":\"2\"}", MrBean.class);
         Assert.assertEquals("1", mrBean.bar);
@@ -37,8 +36,7 @@ public class TestOpenTableJacksonRelaxedParser
 
     @Test
     public void testUnquotedFieldNames() throws Exception {
-        OpenTableJacksonConfiguration conf = new OpenTableJacksonConfiguration();
-        conf.relaxedParser = true;
+        OpenTableJacksonConfiguration conf = new OpenTableJacksonConfiguration().setRelaxedParser(true);
         final ObjectMapper mapper = conf.objectMapper();
         MrBean mrBean = mapper.readValue("{bar:\"1\",\"foo\":\"2\"}", MrBean.class);
         Assert.assertEquals("1", mrBean.bar);
