@@ -30,7 +30,6 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
 import com.fasterxml.jackson.module.mrbean.MrBeanModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
-import com.google.common.annotations.VisibleForTesting;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -151,5 +150,9 @@ public class OpenTableJacksonConfiguration
     public OpenTableJacksonConfiguration setTimeFormat(final JacksonTimeFormat timeFormat) {
         this.timeFormat = timeFormat;
         return this;
+    }
+
+    public void setDateFormat(final DateFormat dateFormat) {
+        this.dateFormat = dateFormat;
     }
 }
