@@ -58,6 +58,7 @@ public class OpenTableJacksonConfiguration
     private DateFormat dateFormat = new StdDateFormat().withColonInTimeZone(false);
 
     @Bean
+    @SuppressWarnings("deprecation")
     public ObjectMapper objectMapper() {
         ObjectMapper mapper = new ObjectMapper().setDateFormat(dateFormat);
 
@@ -153,7 +154,8 @@ public class OpenTableJacksonConfiguration
         return this;
     }
 
-    public void setDateFormat(final DateFormat dateFormat) {
+    public OpenTableJacksonConfiguration setDateFormat(final DateFormat dateFormat) {
         this.dateFormat = dateFormat;
+        return this;
     }
 }
