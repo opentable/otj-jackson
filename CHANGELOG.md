@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.1.6
+-----
+* ObjectMapper default forced to turn colons off. Jackson
+2.11 changes this, breaking compatibility. 
+
 2.1.5
 -----
 * ot.jackson.relaxed-parser is false by default
