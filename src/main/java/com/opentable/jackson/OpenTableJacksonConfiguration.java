@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.util.StdDateFormat;
@@ -31,6 +32,8 @@ import com.fasterxml.jackson.module.afterburner.AfterburnerModule;
 import com.fasterxml.jackson.module.mrbean.MrBeanModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 
+import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -54,8 +57,15 @@ public class OpenTableJacksonConfiguration
     @Value("${ot.jackson.relaxed-parser:#{false}}")
     private boolean relaxedParser = false;
 
+    @Value("${ot.jackson.register-module-beans:#{true}}")
+    private boolean registerModuleBeans;
+
+    @Autowired
+    private ObjectProvider<Module> modules = null;
+
     // See https://github.com/FasterXML/jackson-databind/issues/2643 for why the custom dateformat
     private DateFormat dateFormat = new StdDateFormat().withColonInTimeZone(false);
+
 
     @Bean
     @SuppressWarnings("deprecation")
@@ -71,6 +81,9 @@ public class OpenTableJacksonConfiguration
         }
         if (enableAfterBurner) {
             mapper.registerModule(afterburnerModule());
+        }
+        if (registerModuleBeans && (modules != null)) {
+            mapper.registerModules(modules);
         }
 
         // This needs to be set, otherwise the mapper will fail on every new property showing up.
@@ -156,6 +169,16 @@ public class OpenTableJacksonConfiguration
 
     public OpenTableJacksonConfiguration setDateFormat(final DateFormat dateFormat) {
         this.dateFormat = dateFormat;
+        return this;
+    }
+
+    public OpenTableJacksonConfiguration setRegisterModuleBeans(boolean registerModuleBeans) {
+        this.registerModuleBeans = registerModuleBeans;
+        return this;
+    }
+
+    OpenTableJacksonConfiguration setModules(ObjectProvider<Module> modules) {
+        this.modules = modules;
         return this;
     }
 }
