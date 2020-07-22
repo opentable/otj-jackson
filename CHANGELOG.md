@@ -1,5 +1,9 @@
 Changelog
 =========
+5.2.0
+-----
+* Recompile for Spring 5.2
+* Add ability inject custom modules
 
 2.1.6
 -----
