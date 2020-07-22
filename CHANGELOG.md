@@ -5,10 +5,18 @@ Changelog
 * Recompile for Spring 5.2
 * Add ability inject custom modules
 
-2.1.6
+2.1.8
+-----
+* Allow optional injection of Modules
+
+2.1.7
 -----
 * ObjectMapper default forced to turn colons off. Jackson
 2.11 changes this, breaking compatibility. 
+
+2.1.6
+-----
+* DAG for 5.1
 
 2.1.5
 -----
