@@ -17,8 +17,8 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.opentable</groupId>
-    <artifactId>otj-parent-dag-build</artifactId>
-    <version>286-2.4.3-SNAPSHOT</version>
+    <artifactId>otj-parent-spring</artifactId>
+    <version>287</version>
   </parent>
 
   <scm>
@@ -35,7 +35,6 @@
   <description>Jackson related code</description>
 
   <properties>
-    <!-- Remove once parent updated -->
     <basepom.oss.skip-scala-doc>true</basepom.oss.skip-scala-doc>
     <basepom.check.skip-javadoc>false</basepom.check.skip-javadoc>
     <basepom.check.fail-javadoc>false</basepom.check.fail-javadoc>
