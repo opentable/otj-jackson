@@ -16,7 +16,9 @@
 package com.opentable.jackson;
 
 import java.text.DateFormat;
+import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -68,7 +70,6 @@ public class OpenTableJacksonConfiguration
 
 
     @Bean
-    @SuppressWarnings("deprecation")
     public ObjectMapper objectMapper() {
         ObjectMapper mapper = new ObjectMapper().setDateFormat(dateFormat);
 
@@ -90,7 +91,9 @@ public class OpenTableJacksonConfiguration
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
         // Don't write out nulls by default -- if you really want them, you can change it with setOptions later.
-        mapper.configure(SerializationFeature.WRITE_NULL_MAP_VALUES, false);
+        //MJB: old deprecated version
+        //mapper.configure(SerializationFeature.WRITE_NULL_MAP_VALUES, false);
+       mapper.configOverride(Map.class).setInclude(JsonInclude.Value.construct(Include.NON_NULL, Include.NON_NULL));
 
         // No need to flush after every value, which cuts throughput by ~30%
         mapper.configure(SerializationFeature.FLUSH_AFTER_WRITE_VALUE, false);

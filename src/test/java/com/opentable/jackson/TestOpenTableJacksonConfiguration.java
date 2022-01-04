@@ -15,8 +15,13 @@
  */
 package com.opentable.jackson;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -35,6 +40,34 @@ public class TestOpenTableJacksonConfiguration
         MrBean mrBean = mapper.readValue("{\"bar\":\"1\",\"foo\":\"2\"}", MrBean.class);
         Assert.assertEquals("1", mrBean.bar);
         Assert.assertEquals("2", mrBean.foo);
+    }
+
+    private static class MapHolder {
+        private Map<String, Object> map;
+        private String foo;
+        public MapHolder(Map<String, Object> map, String  foo) {
+            this.map = map;
+            this.foo = foo;
+        }
+
+        public Map<String, Object> getMap() {
+            return map;
+        }
+
+        public String getFoo() {
+            return foo;
+        }
+    }
+    @Test
+    public void testMapNull() throws Exception {
+        final Map<String, Object> map = new HashMap<>();
+        map.put("string", "value");
+        map.put("int", 1);
+        map.put("null1", null);
+        map.put(null, null);
+        final MapHolder mapHolder = new MapHolder(map, "mike");
+        // Null keys and values are dropped.
+        Assert.assertEquals("{\"map\":{\"string\":\"value\",\"int\":1},\"foo\":\"mike\"}", mapper.writeValueAsString(mapHolder));
     }
 
     @Test
