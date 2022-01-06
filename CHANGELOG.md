@@ -1,5 +1,10 @@
 Changelog
 =========
+
+5.2.1
+-----
+* Allow injection of 0 or many OpenTableJacksonCustomizers
+
 5.2.0
 -----
 * Recompile for Spring 5.2
