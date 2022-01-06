@@ -1,5 +1,10 @@
 Changelog
 =========
+
+5.2.1
+-----
+* Remove deprecated usage for WRITE_NULL_VALUES map, use a supported method
+
 5.2.0
 -----
 * Recompile for Spring 5.2
