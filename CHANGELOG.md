@@ -1,6 +1,10 @@
 Changelog
 =========
 
+5.2.3 (unreleased)
+----
+* Add static method for testing objectMapper.
+
 5.2.2
 -----
 * Allow injection of 0 or many OpenTableJacksonCustomizers

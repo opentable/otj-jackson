@@ -193,4 +193,10 @@ public class OpenTableJacksonConfiguration
         this.modules = modules;
         return this;
     }
+
+    // Encourage folks to use this version instead of new OpenTableJacksonConfiguration which
+    // places limitations on the customization choices we can make
+    public static ObjectMapper testing() {
+        return new OpenTableJacksonConfiguration().objectMapper();
+    }
 }
