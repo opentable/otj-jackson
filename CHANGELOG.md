@@ -1,9 +1,14 @@
 Changelog
 =========
 
-5.2.1
+5.2.2
 -----
 * Allow injection of 0 or many OpenTableJacksonCustomizers
+
+
+5.2.1
+-----
+* Remove deprecated usage for WRITE_NULL_VALUES map, use a supported method
 
 5.2.0
 -----
