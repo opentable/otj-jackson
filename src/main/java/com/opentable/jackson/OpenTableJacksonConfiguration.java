@@ -189,8 +189,13 @@ public class OpenTableJacksonConfiguration
         return this;
     }
 
-    OpenTableJacksonConfiguration setModules(ObjectProvider<Module> modules) {
+    public OpenTableJacksonConfiguration setModules(ObjectProvider<Module> modules) {
         this.modules = modules;
+        return this;
+    }
+
+    public OpenTableJacksonConfiguration setCustomizerSet(Set<OpenTableJacksonCustomizer> customizerSet) {
+        this.customizerSet = customizerSet;
         return this;
     }
 
