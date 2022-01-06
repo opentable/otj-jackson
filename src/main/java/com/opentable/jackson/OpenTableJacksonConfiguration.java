@@ -16,6 +16,7 @@
 package com.opentable.jackson;
 
 import java.text.DateFormat;
+import java.util.Set;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -65,9 +66,11 @@ public class OpenTableJacksonConfiguration
     @Autowired
     private ObjectProvider<Module> modules = null;
 
+    @Autowired(required = false)
+    private Set<OpenTableJacksonCustomizer> customizerSet = null;
+
     // See https://github.com/FasterXML/jackson-databind/issues/2643 for why the custom dateformat
     private DateFormat dateFormat = new StdDateFormat().withColonInTimeZone(false);
-
 
     @Bean
     public ObjectMapper objectMapper() {
@@ -121,6 +124,12 @@ public class OpenTableJacksonConfiguration
             mapper.configure(JsonParser.Feature.ALLOW_SINGLE_QUOTES, true);
             // Unquoted field names
             mapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
+        }
+
+        if (customizerSet != null && !customizerSet.isEmpty()) {
+            customizerSet.forEach(customizer -> {
+                customizer.accept(mapper);
+            });
         }
 
         return mapper;
