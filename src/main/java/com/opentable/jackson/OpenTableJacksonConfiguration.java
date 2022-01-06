@@ -67,7 +67,7 @@ public class OpenTableJacksonConfiguration
     private ObjectProvider<Module> modules = null;
 
     @Autowired(required = false)
-    private Set<OpenTableJacksonCustomizer> customizerSet = null;
+    private Set<OpenTableJacksonCustomizer> customizerSet;
 
     // See https://github.com/FasterXML/jackson-databind/issues/2643 for why the custom dateformat
     private DateFormat dateFormat = new StdDateFormat().withColonInTimeZone(false);
